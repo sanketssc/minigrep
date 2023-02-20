@@ -7,18 +7,12 @@ fn main() {
     let args: Vec<String> = env::args().collect();
 
     let config = Config::build(&args).unwrap_or_else(|err| {
-        println!("Problem parsing arguements: {err}");
+        eprintln!("Problem parsing arguements: {err}");
         process::exit(1);
-    }
-    );
+    });
 
-    println!("Searching for {}", config.query);
-
-    println!("In file {}", config.file_path);
-
-    if let Err(e) = minigrep::run(config){
-        println!("Application Erorr: {e}");
+    if let Err(e) = minigrep::run(config) {
+        eprintln!("Application Erorr: {e}");
         process::exit(1);
     }
 }
-
